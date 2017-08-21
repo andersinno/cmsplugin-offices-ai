@@ -13,7 +13,7 @@ setup(
     ),
     include_package_data=True,
     license='MIT',
-    long_description=open('README.md').read(),
+    long_description=open('README.rst').read(),
     description='Office and personnel management app for Django CMS',
     install_requires=[
         'django-cms>=3.2,<3.5',
