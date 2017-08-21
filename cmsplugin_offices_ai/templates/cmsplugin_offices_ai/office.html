@@ -1,0 +1,26 @@
+{% load i18n %}
+
+<div class="office">
+    <h3>{{ office.name }}</h3>
+    {% if office.description %}
+        <p class="description">{{ office.description }}</p>
+    {% endif %}
+    <div class="address">{{ office.address }}</div>
+    {% for contact_entry in office.office_contact_information.all %}
+        <div class="{{ contact_entry.entry_type.value }}">
+            <a href="{{ contact_entry.get_link_href_prefix }}{{ contact_entry.value }}">
+                {{ contact_entry.value }}
+            </a>
+        </div>
+    {% endfor %}
+    {% if google_maps_api_key and instance.show_map_embeds %}
+        <iframe
+            width="100%"
+            height="250"
+            frameborder="0"
+            src="https://www.google.com/maps/embed/v1/place?key={{ google_maps_api_key }}&amp;q={{ office.google_maps_embed_q }}"
+            allowfullscreen
+        >
+        </iframe>
+    {% endif %}
+</div>

@@ -1,0 +1,23 @@
+{% load i18n thumbnail %}
+
+<div class="person">
+    {% if person.image %}
+        <div class="image">
+            <img src="{% thumbnail person.image 100x150 crop upscale %}" alt="{{ person.name }}">
+        </div>
+    {% endif %}
+    <h3>{{ person.name }}</h3>
+    {% if person.title %}
+        <p class="title">{{ person.title }}</p>
+    {% endif %}
+    {% if person.description %}
+        <p class="description">{{ person.description }}</p>
+    {% endif %}
+    {% for contact_entry in person.person_contact_information.all %}
+        <div class="{{ contact_entry.entry_type.value }}">
+            <a href="{{ contact_entry.get_link_href_prefix }}{{ contact_entry.value }}">
+                {{ contact_entry.value }}
+            </a>
+        </div>
+    {% endfor %}
+</div>

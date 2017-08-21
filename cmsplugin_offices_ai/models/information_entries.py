@@ -8,6 +8,12 @@ from cmsplugin_offices_ai.models.departments import Department
 from cmsplugin_offices_ai.models.offices import Office
 from cmsplugin_offices_ai.models.personnel import Person
 
+HREF_PREFIXES = {
+    'email': 'mailto:',
+    'phone': 'tel:',
+    'fax': 'fax:',
+}
+
 
 class EntryType(Enum):
     EMAIL = 'email'
@@ -64,3 +70,6 @@ class ContactInformationEntry(models.Model):
 
     def __str__(self):
         return "Contact information entry"
+
+    def get_link_href_prefix(self):
+        return HREF_PREFIXES.get(self.entry_type.value, "")
