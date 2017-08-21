@@ -21,5 +21,8 @@ setup(
         'django-enumfields>=0.9.0',
         'easy-thumbnails>=2.3',
     ],
+    extras_require=({
+        'utils': ['factory-boy~=2.8.0'],
+    }),
     url='https://github.com/andersinno/cmsplugin-offices-ai',
 )
