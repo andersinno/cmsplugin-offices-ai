@@ -1,0 +1,20 @@
+<div class="department">
+    <h3>{{ department.name }}</h3>
+    {% if department.description %}
+        <p class="description">{{ department.description }}</p>
+    {% endif %}
+    {% for contact_entry in department.department_contact_information.all %}
+        <div class="{{ contact_entry.entry_type.value }}">
+            <a href="{{ contact_entry.get_link_href_prefix }}{{ contact_entry.value }}">
+                {{ contact_entry.value }}
+            </a>
+        </div>
+    {% endfor %}
+    {% if instance.show_personnel %}
+        <div class="personnel">
+            {% for person in department.personnel_in_department.public.in_order %}
+                {% include "cmsplugin_offices_ai/person.html" %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
